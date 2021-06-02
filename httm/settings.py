@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'backend.urls'
+ROOT_URLCONF = 'httm.urls'
 
 TEMPLATES = [
     {
@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'httm',
         'USER': 'root',
-        'PASSWORD': '123456',
+        'PASSWORD': 'longling123',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {
