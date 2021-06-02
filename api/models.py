@@ -385,7 +385,9 @@ class Shippingaddress(models.Model):
     # orderid = models.ForeignKey(Order, models.CASCADE, db_column='OrderID')  # Field name made lowercase.
     customerid = models.ForeignKey(Customer, models.CASCADE, db_column='CustomerID')  # Field name made lowercase.
     # customeruserid = models.ForeignKey(Customer, models.CASCADE, db_column='CustomerUserID')  # Field name made lowercase.
-    note = models.CharField(db_column='Note', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    phone = models.CharField(db_column='Phone', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)
+    add = models.CharField(db_column='Add', max_length=255, blank=True, null=True)
 
     class Meta:
         
