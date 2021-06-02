@@ -214,7 +214,7 @@ class Fullname(models.Model):
 class Historyline(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     orderhistoryid = models.ForeignKey('Orderhistory', models.CASCADE, db_column='OrderHistoryID')  # Field name made lowercase.
-    orderinfo = models.CharField(db_column='OrderInfo', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    orderinfo = models.ForeignKey('Order', models.CASCADE, db_column='OrderID')  # Field name made lowercase. 
 
     class Meta:
         
@@ -274,11 +274,11 @@ class Membershiptype(models.Model):
 
 class Order(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    orderprocessstaffuserid = models.ForeignKey('Orderprocessstaff', models.CASCADE, db_column='OrderProcessStaffUserID')  # Field name made lowercase.
-    customeruserid = models.ForeignKey(Customer, models.CASCADE, db_column='CustomerUserID')  # Field name made lowercase.
-    taxid = models.ForeignKey('Tax', models.CASCADE, db_column='TaxID')  # Field name made lowercase.
+    orderprocessstaffuserid = models.ForeignKey('Orderprocessstaff', models.CASCADE, db_column='OrderProcessStaffUserID', blank=True, null=True)  # Field name made lowercase.
+    customeruserid = models.ForeignKey(Customer, models.CASCADE, db_column='CustomerUserID', blank=True, null=True)  # Field name made lowercase.
+    # taxid = models.ForeignKey('Tax', models.CASCADE, db_column='TaxID')  # Field name made lowercase.
     voucherid = models.ForeignKey('Voucher', models.CASCADE, db_column='VoucherID')  # Field name made lowercase.
-    historylineid = models.ForeignKey("Historyline", models.CASCADE, db_column='HistoryLineID')  # Field name made lowercase.
+    # historylineid = models.ForeignKey("Historyline", models.CASCADE, db_column='HistoryLineID')  # Field name made lowercase.
     shoppingcartid = models.ForeignKey("Shoppingcart", models.CASCADE, db_column='ShoppingcartID')
     # customer = models.IntegerField(db_column='Customer', blank=True, null=True)  # Field name made lowercase.
     # processstaffid = models.IntegerField(db_column='ProcessStaffID', blank=True, null=True)  # Field name made lowercase.
@@ -288,6 +288,7 @@ class Order(models.Model):
     shippingaddress = models.ForeignKey("ShippingAddress", models.CASCADE, db_column='ShippingAddressID')   # Field name made lowercase.
     # shoppingcart = models.IntegerField(db_column='ShoppingCart', blank=True, null=True)  # Field name made lowercase.
     shippinginfo =models.ForeignKey("Shippinginfo", models.CASCADE, db_column='Shippinginfo')   # Field name made lowercase.
+    status = models.CharField(db_column='Status', max_length=255, blank=True, null=True)
 
     class Meta:
         
@@ -411,7 +412,7 @@ class Shippinginfo(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     # orderid = models.ForeignKey(Order, models.CASCADE, db_column='OrderID')  # Field name made lowercase.
     shipfee = models.FloatField(db_column='ShipFee', blank=True, null=True)  # Field name made lowercase.
-    delaydate = models.CharField(db_column='DelayDate', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    delaydate = models.IntegerField(db_column='DelayDate', blank=True, null=True)  # Field name made lowercase.
     note = models.CharField(db_column='Note', max_length=255, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -484,7 +485,7 @@ class Voucher(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
     discountpercent = models.FloatField(db_column='DiscountPercent', blank=True, null=True)  # Field name made lowercase.
-    discountamount = models.IntegerField(db_column='DiscountAmount', blank=True, null=True)  # Field name made lowercase.
+    maxamount = models.IntegerField(db_column='MaxAmount', blank=True, null=True)  # Field name made lowercase.
     description = models.CharField(db_column='Description', max_length=255, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:

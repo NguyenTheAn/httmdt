@@ -41,12 +41,9 @@ def getShippingAddressList(customerid = None):
         tmp["addresd_id"] = add.id
         tmp["name"] = add.name
         tmp["phone"] = add.phone
-        tmp["add"] = add.note
+        tmp["add"] = add.add
         return_data.append(tmp)
     return return_data
-
-
-
 
 def getUser(userid = None):
     users = [user for user in User.objects.all()]
@@ -69,6 +66,9 @@ def getUser(userid = None):
             customer_id = Customer.objects.get(userid = user.id).id
             tmp["customer_id"] = customer_id
             tmp['cart'] = getShoppingCart(customerid = customer_id)
+            if Orderhistory.objects.filter(customerid = customer_id).count() == 0:
+                orderhistory = Orderhistory(customerid = customer_id)
+                orderhistory.save()
             
         if userid == user.id:
             return_data = tmp

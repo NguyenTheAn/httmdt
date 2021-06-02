@@ -30,19 +30,31 @@ class AddItem2Cart(APIView):
 
         return json_format(code=200, message="success", data = None)
 
-class GetCart(APIView):
-    def post(sef, request):
+class AddOrder(APIView):
+    def post(self, request):
         data = request.data
-        userid = data['userid']
-        customer = Customer.objects.get(userid__id = userid)
-        if Shoppingcart.objects.filter(customerid__id = customer.id).count() == 0:
-            cart = Shoppingcart(customerid = customer)
+        customerid = data['customerid']
+        customer = Customer.objects.get(id = customerid)
+        voucher = Voucher.objects.get(id = data['voucherid'])
+        shoppingcart = Shoppingcart.objects.get(customerid__id = customerid)
+        shippingaddress = Shippingaddress.objects.get(id = data['shippingaddressid'])
+        if Shippinginfo.objects.all().count() == 0:
+            shippinginfo = Shippinginfo(shipfee = 15000, delaydate = 3)
+            shippinginfo.save()
         else:
-            cart = Shoppingcart.objects.get(customer__id = customer.id) 
-            cart.save()
+            shippinginfo = Shippinginfo.objects.get(id = 1)
+        order= Order(orderprocessstaffuserid = None, customeruserid = customer, voucherid = voucher, shoppingcartid = shoppingcart, shippingaddress = shippingaddress, shippinginfo = shippinginfo)
+        order.save()
+        orderhistory = Orderhistory.objects.get(customerid__id = customerid)
+        orderline = Historyline(orderhistoryid = orderhistory, orderinfo = order)
+        orderline.save()
+        
+        return json_format(code=200, message="success", data = None)
 
-        cartlines = Cartline.objects.filter(shoppingcartid__id = cart.id)
-        cartlinedata = []
-        for cartline in cartlines:
-            tmp = {}
-            tmp['item'] = getItem()
+class GetOrderHistory(APIView):
+    def post(self, request):
+        data = request.data
+        customerid = data['customerid']
+        orderlines = getOrderline(customerid)
+
+        return json_format(code=200, message="success", data = orderlines)
