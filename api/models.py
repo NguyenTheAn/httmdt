@@ -59,7 +59,8 @@ class Book(models.Model):
 
 
 class Businessstaff(models.Model):
-    userid = models.OneToOneField('User', models.CASCADE, db_column='UserID', primary_key=True)  # Field name made lowercase.
+    id = models.AutoField(db_column='ID', primary_key=True)
+    userid = models.OneToOneField('User', models.CASCADE, db_column='UserID')  # Field name made lowercase.
 
     class Meta:
         
@@ -140,7 +141,7 @@ class Customer(models.Model):
     class Meta:
         
         db_table = 'customer'
-        unique_together = (('id', 'userid'),)
+        # unique_together = (('id', 'userid'),)
 
 
 class Customerreview(models.Model):
@@ -274,10 +275,10 @@ class Membershiptype(models.Model):
 class Order(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     orderprocessstaffuserid = models.ForeignKey('Orderprocessstaff', models.CASCADE, db_column='OrderProcessStaffUserID')  # Field name made lowercase.
-    # customeruserid = models.ForeignKey(Customer, models.CASCADE, db_column='CustomerUserID')  # Field name made lowercase.
+    customeruserid = models.ForeignKey(Customer, models.CASCADE, db_column='CustomerUserID')  # Field name made lowercase.
     taxid = models.ForeignKey('Tax', models.CASCADE, db_column='TaxID')  # Field name made lowercase.
     voucherid = models.ForeignKey('Voucher', models.CASCADE, db_column='VoucherID')  # Field name made lowercase.
-    historylineid = models.ForeignKey(Historyline, models.CASCADE, db_column='HistoryLineID')  # Field name made lowercase.
+    historylineid = models.ForeignKey("Historyline", models.CASCADE, db_column='HistoryLineID')  # Field name made lowercase.
     shoppingcartid = models.ForeignKey("Shoppingcart", models.CASCADE, db_column='ShoppingcartID')
     # customer = models.IntegerField(db_column='Customer', blank=True, null=True)  # Field name made lowercase.
     # processstaffid = models.IntegerField(db_column='ProcessStaffID', blank=True, null=True)  # Field name made lowercase.
@@ -306,7 +307,8 @@ class Orderhistory(models.Model):
 
 
 class Orderprocessstaff(models.Model):
-    userid = models.OneToOneField('User', models.CASCADE, db_column='UserID', primary_key=True)  # Field name made lowercase.
+    id = models.AutoField(db_column='ID', primary_key=True)
+    userid = models.OneToOneField('User', models.CASCADE, db_column='UserID')  # Field name made lowercase.
 
     class Meta:
         
@@ -383,7 +385,7 @@ class Qrcode(models.Model):
 
 
 class Salesstaff(models.Model):
-    id = models.IntegerField(db_column='ID', primary_key=True)
+    id = models.AutoField(db_column='ID', primary_key=True)
     userid = models.OneToOneField('User', models.CASCADE, db_column='UserID')  # Field name made lowercase.
 
     class Meta:
@@ -396,7 +398,9 @@ class Shippingaddress(models.Model):
     # orderid = models.ForeignKey(Order, models.CASCADE, db_column='OrderID')  # Field name made lowercase.
     customerid = models.ForeignKey(Customer, models.CASCADE, db_column='CustomerID')  # Field name made lowercase.
     # customeruserid = models.ForeignKey(Customer, models.CASCADE, db_column='CustomerUserID')  # Field name made lowercase.
-    note = models.CharField(db_column='Note', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    phone = models.CharField(db_column='Phone', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)
+    add = models.CharField(db_column='Add', max_length=255, blank=True, null=True)
 
     class Meta:
         
@@ -489,7 +493,7 @@ class Voucher(models.Model):
 
 
 class Warehousestaff(models.Model):
-    id = models.IntegerField(db_column='ID', primary_key=True)
+    id = models.AutoField(db_column='ID', primary_key=True)
     userid = models.OneToOneField(User, models.CASCADE, db_column='UserID')  # Field name made lowercase.
 
     class Meta:
