@@ -18,6 +18,7 @@ class AddItem2Cart(APIView):
             cart = Shoppingcart(customerid = customer)
         else:
             cart = Shoppingcart.objects.get(customer__id = customer.id)
+            cart.save()
 
         if Cartline.objects.filter(shoppingcartid__id = cart.id, item__id = item.id).count() == 0:
             cartline = Cartline(shoppingcartid = cart, item = item, num = 1)
@@ -25,7 +26,6 @@ class AddItem2Cart(APIView):
             cartline = Cartline.objects.get(shoppingcartid__id = cart.id, item__id = item.id)
             cartline.num += 1
 
-        cart.save()
         cartline.save()
 
         return json_format(code=200, message="success", data = None)
@@ -33,4 +33,16 @@ class AddItem2Cart(APIView):
 class GetCart(APIView):
     def post(sef, request):
         data = request.data
-        
+        userid = data['userid']
+        customer = Customer.objects.get(userid__id = userid)
+        if Shoppingcart.objects.filter(customerid__id = customer.id).count() == 0:
+            cart = Shoppingcart(customerid = customer)
+        else:
+            cart = Shoppingcart.objects.get(customer__id = customer.id) 
+            cart.save()
+
+        cartlines = Cartline.objects.filter(shoppingcartid__id = cart.id)
+        cartlinedata = []
+        for cartline in cartlines:
+            tmp = {}
+            tmp['item'] = getItem()
