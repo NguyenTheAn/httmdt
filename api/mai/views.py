@@ -101,10 +101,12 @@ class AddShippingAddress(APIView):
 
     def post(self, request, format = None):
         data = request.data
+        customer = Customer.objects.get(id = data["customer_id"] )
         shippingaddress = Shippingaddress()
+        shippingaddress.customerid = customer
         shippingaddress.name = data["name"]
         shippingaddress.phone = data["phone"]
-        shippingaddress.add = data["add"]
+        shippingaddress.add = data["address"]
         shippingaddress.save()
         return json_format(code = 200, message= "Success")
 

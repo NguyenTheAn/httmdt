@@ -41,7 +41,7 @@ def getShippingAddressList(customerid = None):
         tmp["addresd_id"] = add.id
         tmp["name"] = add.name
         tmp["phone"] = add.phone
-        tmp["add"] = add.note
+        tmp["address"] = add.note
         return_data.append(tmp)
     return return_data
 
