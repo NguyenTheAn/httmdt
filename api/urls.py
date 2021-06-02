@@ -15,10 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .long.views import *
 from .views import *
 from .an.views import *
 
 urlpatterns = [
     # partner
     # path('AllTaxStatistic', AllTaxStatistic.as_view(), name = "AllTaxStatistic"), sample
+
+    # Producer
+    path('add_producer', AddProducer.as_view(), name = "add_producer"),
+    path('get_producer', GetProducer.as_view(), name = "get_producer"),
+
+    # Product
+    path('add_product', AddProduct.as_view(), name = "add_product"),
+    path('get_product', GetProduct.as_view(), name = "get_product"),
+    path('edit_product', EditProduct.as_view(), name = "edit_product"),
+    path('delete_product', DeleteProduct.as_view(), name = "delete_product"),
+
+    # Import product
+    path('import_product', ImportProduct.as_view(), name = "import_product"),
+
+
 ]

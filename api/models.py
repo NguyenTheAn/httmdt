@@ -36,10 +36,11 @@ class Address(models.Model):
 
 
 class Book(models.Model):
+    name = models.CharField(db_column='Bank', max_length=255, blank=True, null=True)  # Field name made lowercase.
     page = models.IntegerField(db_column='Page', blank=True, null=True)  # Field name made lowercase.
-    author = models.ForeignKey('Fullname', models.CASCADE, db_column='AuthorFullname')   # Field name made lowercase.
-    genre = models.IntegerField(db_column='Genre', blank=True, null=True)  # Field name made lowercase.
-    quantity = models.IntegerField(db_column='Quantity', blank=True, null=True)  # Field name made lowercase.
+    author = models.ForeignKey('Fullname', models.CASCADE, db_column='AuthorFullname', null=True)   # Field name made lowercase.
+    # genre = models.IntegerField(db_column='Genre', blank=True, null=True)  # Field name made lowercase.
+    # quantity = models.IntegerField(db_column='Quantity', blank=True, null=True)  # Field name made lowercase.
     productid = models.OneToOneField('Product', models.CASCADE, db_column='ProductID', primary_key=True)  # Field name made lowercase.
 
     class Meta:
@@ -47,14 +48,14 @@ class Book(models.Model):
         db_table = 'book'
 
 
-class BookGenre(models.Model):
-    bookproductid = models.OneToOneField(Book, models.CASCADE, db_column='BookProductID', primary_key=True)  # Field name made lowercase.
-    genreid = models.ForeignKey('Genre', models.CASCADE, db_column='GenreID')  # Field name made lowercase.
+# class BookGenre(models.Model):
+#     bookproductid = models.OneToOneField(Book, models.CASCADE, db_column='BookProductID', primary_key=True)  # Field name made lowercase.
+#     genreid = models.ForeignKey('Genre', models.CASCADE, db_column='GenreID')  # Field name made lowercase.
 
-    class Meta:
+#     class Meta:
         
-        db_table = 'book_genre'
-        unique_together = (('bookproductid', 'genreid'),)
+#         db_table = 'book_genre'
+#         unique_together = (('bookproductid', 'genreid'),)
 
 
 class Businessstaff(models.Model):
@@ -199,14 +200,14 @@ class Fullname(models.Model):
         db_table = 'fullname'
 
 
-class Genre(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    description = models.CharField(db_column='Description', max_length=255, blank=True, null=True)  # Field name made lowercase.
+# class Genre(models.Model):
+#     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+#     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
+#     description = models.CharField(db_column='Description', max_length=255, blank=True, null=True)  # Field name made lowercase.
 
-    class Meta:
+#     class Meta:
         
-        db_table = 'genre'
+#         db_table = 'genre'
 
 
 class Historyline(models.Model):
