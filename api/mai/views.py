@@ -14,7 +14,7 @@ class Register(APIView):
         accounts = [account for account in Account.objects.all()]
         usernames = [account.username for account in accounts]
         
-        if data["username"] in usernames:
+        if data["email"] in usernames:
             return json_format(code = 400, message = "Account exists")
 
         address = Address()
@@ -37,8 +37,9 @@ class Register(APIView):
 
         user.save()
 
-        if data['role'] == "Customer":
-            a = Customer(userid = user)
+        if data["role"] == "Customer":
+            a = Customer()
+            a.userid = user
             a.save()
         elif data['role'] == "WarehouseStaff":
             a = Warehousestaff(userid = user)
@@ -63,30 +64,41 @@ class Signin(APIView):
         data = request.data
         for user in users:
             for account in accounts:
-                if user.account = account:
-                    if account.username = data["username"] and account.password = data["password"]:
-                        data = getUser(user.id)
-                    return json_format(code = 200, message = "Login successfully", data = data)
+                if user.account == account:
+                    if account.username == data["username"] and account.password == data["password"]:
+                        data1 = getUser(user.id)
+                        return json_format(code = 200, message = "Login successfully", data = data1)
         return json_format(code = 400, message = "Wrong username or password")
 
 class GetItemByCategory(APIView):
     def post(self, request, format=None):
         data = request.data
         data = getItem(category =  data["category"])
-        return json_format(code = 200, message = "Success")    
+        return json_format(code = 200, message = "Success", data = data)    
 
-class getItemDetail(APIView):
+class GetItemDetail(APIView):
+
     def post(self, request, format = None):
         data = request.data
         data = getItem(itemid = data["item_id"])
-        return json_format(code = 200, message= "Success")
+        return json_format(code = 200, message= "Success", data = data)
 
-class getShippingAddress(APIView):
+class GetAllItem(APIView):
+
+    def post(self, request, format =  None):
+        data = request.data
+        data = getItem()
+        return json_format(code=200, message="Success", data = data)
+
+class GetShippingAddress(APIView):
+
     def post(self, request, format = None):
         data = request.data
         data = getShippingAddressList(customerid=data["customer_id"])
+        return json_format(code = 200, message= "Success", data = data)
 
-class addShippingAddress(APIView):
+class AddShippingAddress(APIView):
+
     def post(self, request, format = None):
         data = request.data
         shippingaddress = Shippingaddress()
@@ -94,4 +106,5 @@ class addShippingAddress(APIView):
         shippingaddress.phone = data["phone"]
         shippingaddress.add = data["add"]
         shippingaddress.save()
-        
+        return json_format(code = 200, message= "Success")
+
