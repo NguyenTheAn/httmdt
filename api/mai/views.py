@@ -68,3 +68,30 @@ class Signin(APIView):
                         data = getUser(user.id)
                     return json_format(code = 200, message = "Login successfully", data = data)
         return json_format(code = 400, message = "Wrong username or password")
+
+class GetItemByCategory(APIView):
+    def post(self, request, format=None):
+        data = request.data
+        data = getItem(category =  data["category"])
+        return json_format(code = 200, message = "Success")    
+
+class getItemDetail(APIView):
+    def post(self, request, format = None):
+        data = request.data
+        data = getItem(itemid = data["item_id"])
+        return json_format(code = 200, message= "Success")
+
+class getShippingAddress(APIView):
+    def post(self, request, format = None):
+        data = request.data
+        data = getShippingAddressList(customerid=data["customer_id"])
+
+class addShippingAddress(APIView):
+    def post(self, request, format = None):
+        data = request.data
+        shippingaddress = Shippingaddress()
+        shippingaddress.name = data["name"]
+        shippingaddress.phone = data["phone"]
+        shippingaddress.add = data["add"]
+        shippingaddress.save()
+        
