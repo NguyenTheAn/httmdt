@@ -47,4 +47,5 @@ urlpatterns = [
     path('add_shipping_address', AddShippingAddress.as_view(), name = "add_shipping_address"),
     path('add_item_to_cart', AddItem2Cart.as_view(), name = "AddItem2Cart"),
     path('add_order', AddOrder.as_view(), name = "add_order"),
+    path('get_order_history', GetOrderHistory.as_view(), name = "get_order_history"),
 ]
