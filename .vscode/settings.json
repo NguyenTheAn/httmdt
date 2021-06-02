@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
     "python.pythonPath": "/home/long/miniconda3/envs/htttql/bin/python"
+=======
+    "python.pythonPath": "/home/ligirk/miniconda3/envs/django/bin/python"
+>>>>>>> c7ea2b6179ac93cf46763df0554b215b3ae3a3ce
 }

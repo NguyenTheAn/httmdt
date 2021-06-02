@@ -37,7 +37,7 @@ class Address(models.Model):
 
 class Book(models.Model):
     page = models.IntegerField(db_column='Page', blank=True, null=True)  # Field name made lowercase.
-    author = models.IntegerField(db_column='Author', blank=True, null=True)  # Field name made lowercase.
+    author = models.ForeignKey('Fullname', models.CASCADE, db_column='AuthorFullname')   # Field name made lowercase.
     genre = models.IntegerField(db_column='Genre', blank=True, null=True)  # Field name made lowercase.
     quantity = models.IntegerField(db_column='Quantity', blank=True, null=True)  # Field name made lowercase.
     productid = models.OneToOneField('Product', models.CASCADE, db_column='ProductID', primary_key=True)  # Field name made lowercase.
@@ -78,7 +78,8 @@ class Card(models.Model):
 class Cartline(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     shoppingcartid = models.ForeignKey('Shoppingcart', models.CASCADE, db_column='ShoppingCartID')  # Field name made lowercase.
-    items = models.IntegerField(db_column='Items', blank=True, null=True)  # Field name made lowercase.
+    item = models.ForeignKey('Item', models.CASCADE, db_column='ItemID')  # Field name made lowercase.
+    num = models.IntegerField(db_column = "NumInCart", blank=True, null=True)
 
     class Meta:
         
@@ -187,8 +188,8 @@ class Feedback(models.Model):
 
 class Fullname(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    bookproductid = models.ForeignKey(Book, models.CASCADE, db_column='BookProductID')  # Field name made lowercase.
-    userid = models.ForeignKey('User', models.CASCADE, db_column='UserID')  # Field name made lowercase.
+    # bookproductid = models.ForeignKey(Book, models.CASCADE, db_column='BookProductID')  # Field name made lowercase.
+    # userid = models.ForeignKey('User', models.CASCADE, db_column='UserID')  # Field name made lowercase.
     firstname = models.CharField(db_column='FirstName', max_length=255, blank=True, null=True)  # Field name made lowercase.
     middlename = models.CharField(db_column='MiddleName', max_length=255, blank=True, null=True)  # Field name made lowercase.
     lastname = models.CharField(db_column='LastName', max_length=255, blank=True, null=True)  # Field name made lowercase.
@@ -234,13 +235,13 @@ class Importingrecord(models.Model):
 
 class Item(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    cartlineid = models.ForeignKey(Cartline, models.CASCADE, db_column='CartLineID')  # Field name made lowercase.
+    # cartlineid = models.ForeignKey(Cartline, models.CASCADE, db_column='CartLineID')  # Field name made lowercase.
     productid = models.ForeignKey('Product', models.CASCADE, db_column='ProductID')  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
     price = models.BigIntegerField(db_column='Price', blank=True, null=True)  # Field name made lowercase.
     description = models.CharField(db_column='Description', max_length=255, blank=True, null=True)  # Field name made lowercase.
     # feedback = models.IntegerField(db_column='Feedback', blank=True, null=True)  # Field name made lowercase.
-    promotion = models.IntegerField(db_column='Promotion', blank=True, null=True)  # Field name made lowercase.
+    # promotion = models.IntegerField(db_column='Promotion', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         
@@ -263,16 +264,16 @@ class Membershiptype(models.Model):
 class Order(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     orderprocessstaffuserid = models.ForeignKey('Orderprocessstaff', models.CASCADE, db_column='OrderProcessStaffUserID')  # Field name made lowercase.
-    customerid = models.ForeignKey(Customer, models.CASCADE, db_column='CustomerID')  # Field name made lowercase.
     # customeruserid = models.ForeignKey(Customer, models.CASCADE, db_column='CustomerUserID')  # Field name made lowercase.
     taxid = models.ForeignKey('Tax', models.CASCADE, db_column='TaxID')  # Field name made lowercase.
     voucherid = models.ForeignKey('Voucher', models.CASCADE, db_column='VoucherID')  # Field name made lowercase.
     historylineid = models.ForeignKey(Historyline, models.CASCADE, db_column='HistoryLineID')  # Field name made lowercase.
+    shoppingcartid = models.ForeignKey("Shoppingcart", models.CASCADE, db_column='ShoppingcartID')
     # customer = models.IntegerField(db_column='Customer', blank=True, null=True)  # Field name made lowercase.
     # processstaffid = models.IntegerField(db_column='ProcessStaffID', blank=True, null=True)  # Field name made lowercase.
     # payment = models.IntegerField(db_column='Payment', blank=True, null=True)  # Field name made lowercase.
-    item = models.IntegerField(db_column='Item', blank=True, null=True)  # Field name made lowercase.
-    voucher = models.IntegerField(db_column='Voucher', blank=True, null=True)  # Field name made lowercase.
+    # item = models.IntegerField(db_column='Item', blank=True, null=True)  # Field name made lowercase.
+    # voucher = models.IntegerField(db_column='Voucher', blank=True, null=True)  # Field name made lowercase.
     shippingaddress = models.ForeignKey("ShippingAddress", models.CASCADE, db_column='ShippingAddressID')   # Field name made lowercase.
     # shoppingcart = models.IntegerField(db_column='ShoppingCart', blank=True, null=True)  # Field name made lowercase.
     shippinginfo =models.ForeignKey("Shippinginfo", models.CASCADE, db_column='Shippinginfo')   # Field name made lowercase.
@@ -404,7 +405,8 @@ class Shippinginfo(models.Model):
 
 class Shoppingcart(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    orderid = models.ForeignKey(Order, models.CASCADE, db_column='OrderID')  # Field name made lowercase.
+    customerid = models.ForeignKey(Customer, models.CASCADE, db_column='CustomerID')  # Field name made lowercase.
+    # orderid = models.ForeignKey(Order, models.CASCADE, db_column='OrderID')  # Field name made lowercase.
     # cartline = models.IntegerField(db_column='CartLine', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -451,6 +453,7 @@ class User(models.Model):
     # account = models.IntegerField(db_column='Account', blank=True, null=True)  # Field name made lowercase.
     addressid = models.OneToOneField(Address, models.CASCADE, db_column='AddressID')  # Field name made lowercase.
     # fullname = models.IntegerField(db_column='FullName', blank=True, null=True)  # Field name made lowercase.
+    fullname = models.ForeignKey('FullName', models.CASCADE, db_column='FullName')
     # contactinfo = models.IntegerField(db_column='Contactinfo', blank=True, null=True)  # Field name made lowercase.
     address = models.IntegerField(db_column='Address', blank=True, null=True)  # Field name made lowercase.
 

@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+<<<<<<< HEAD
 from .long.views import *
+=======
+from .views import *
+from .an.views import *
+>>>>>>> c7ea2b6179ac93cf46763df0554b215b3ae3a3ce
 
 urlpatterns = [
     # partner
