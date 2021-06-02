@@ -130,7 +130,7 @@ class Contactinfo(models.Model):
 
 
 class Customer(models.Model):
-    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     # shippingaddress = models.IntegerField(db_column='ShippingAddress', blank=True, null=True)  # Field name made lowercase.
     # orderhistory = models.IntegerField(db_column='OrderHistory', blank=True, null=True)  # Field name made lowercase.
     # membershiptype = models.IntegerField(db_column='Membershiptype', blank=True, null=True)  # Field name made lowercase.
