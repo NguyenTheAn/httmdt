@@ -451,10 +451,14 @@ class User(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     dateofbirth = models.DateField(db_column='DateOfBirth', blank=True, null=True)  # Field name made lowercase.
     gender = models.CharField(db_column='Gender', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    accountid = models.IntegerField(db_column='Account', blank=True, null=True)  # Field name made lowercase.
-    contactinfoid = models.IntegerField(db_column='Contactinfo', blank=True, null=True)  # Field name made lowercase.
-    addressid = models.IntegerField(db_column='Address', blank=True, null=True)  # Field name made lowercase.
-    fullnameid = models.IntegerField(db_column='FullName', blank=True, null=True)  # Field name made lowercase.
+    account = models.ForeignKey(Account, models.CASCADE, db_column='AccountID')
+    contactinfo = models.ForeignKey(Contactinfo, models.CASCADE, db_column='ContactinfoID')
+    address  = models.ForeignKey(Address, models.CASCADE, db_column='AddressID')
+    fullname = models.ForeignKey(Fullname, models.CASCADE, db_column='FullnameID')
+    # accountid = models.IntegerField(db_column='Account', blank=True, null=True)  # Field name made lowercase.
+    # contactinfoid = models.IntegerField(db_column='Contactinfo', blank=True, null=True)  # Field name made lowercase.
+    # addressid = models.IntegerField(db_column='Address', blank=True, null=True)  # Field name made lowercase.
+    # fullnameid = models.IntegerField(db_column='FullName', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         
