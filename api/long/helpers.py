@@ -98,8 +98,7 @@ def getProduct(productid=None):
         category = getCategory(product.categoryid.id)
         if category['name'] == 'book':
             book = Book.objects.get(productid=productid)
-            info = {"name": book.name,
-                    "page": book.page,
+            info = {"page": book.page,
                     "author": book.author}
         if category['name'] == 'clothes':
             clothes = Clothes.objects.get(productid=productid)
@@ -121,6 +120,7 @@ def getProduct(productid=None):
                     "frequency": electronic.frequency}
         return {"productid": product.id,
                 "producerid": getProducer(product.producerid.id),
+                "name": product.name,
                 "categoryid": category,
                 "info": info,
                 "manifacturingdate": product.manufacturingdate,
@@ -132,8 +132,7 @@ def getProduct(productid=None):
             category = getCategory(product.categoryid.id)
             if category['name'] == 'book':
                 book = Book.objects.get(productid=product.id)
-                info = {"name": book.name,
-                        "page": book.page,
+                info = {"page": book.page,
                         "author": book.author}
             if category['name'] == 'clothes':
                 clothes = Clothes.objects.get(productid=product.id)
@@ -155,6 +154,7 @@ def getProduct(productid=None):
                         "frequency": electronic.frequency}
             return_data.append({"productid": product.id,
                                 "producerid": getProducer(product.producerid.id),
+                                "name": product.name,
                                 "categoryid": category,
                                 "info": info,
                                 "manifacturingdate": product.manufacturingdate,
@@ -164,3 +164,17 @@ def getProduct(productid=None):
 
 def addName(fullnamestr):
     return None
+
+def getItem(itemid=None):
+    if itemid is not None:
+        item = Item.objects.get(id=itemid)
+        return {"itemid": item.id,
+                "productid": getProduct(item.productid.id),
+                "price": item.price,
+                "description": item.description}
+    else:  
+        return [{"itemid": item.id,
+                "productid": getProduct(item.productid.id),
+                "price": item.price,
+                "description": item.description} for item in Item.objects.all()]
+

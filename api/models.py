@@ -36,7 +36,6 @@ class Address(models.Model):
 
 
 class Book(models.Model):
-    name = models.CharField(db_column='Bank', max_length=255, blank=True, null=True)  # Field name made lowercase.
     page = models.IntegerField(db_column='Page', blank=True, null=True)  # Field name made lowercase.
     author = models.ForeignKey('Fullname', models.CASCADE, db_column='AuthorFullname', null=True)   # Field name made lowercase.
     # genre = models.IntegerField(db_column='Genre', blank=True, null=True)  # Field name made lowercase.
@@ -248,7 +247,7 @@ class Item(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     # cartlineid = models.ForeignKey(Cartline, models.CASCADE, db_column='CartLineID')  # Field name made lowercase.
     productid = models.ForeignKey('Product', models.CASCADE, db_column='ProductID')  # Field name made lowercase.
-    name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    # name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
     price = models.BigIntegerField(db_column='Price', blank=True, null=True)  # Field name made lowercase.
     description = models.CharField(db_column='Description', max_length=255, blank=True, null=True)  # Field name made lowercase.
     # feedback = models.IntegerField(db_column='Feedback', blank=True, null=True)  # Field name made lowercase.
@@ -344,6 +343,7 @@ class Product(models.Model):
     # importingrecordid = models.ForeignKey(Importingrecord, models.CASCADE, db_column='ImportingRecordID')  # Field name made lowercase.
     producerid = models.ForeignKey(Producer, models.CASCADE, db_column='ProducerID')  # Field name made lowercase.
     categoryid = models.ForeignKey(Category, models.CASCADE, db_column='CategoryID')  # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
     manufacturingdate = models.DateField(db_column='ManufacturingDate', blank=True, null=True)  # Field name made lowercase.
     expirydate = models.DateField(db_column='ExpiryDate', blank=True, null=True)  # Field name made lowercase.
     amount = models.IntegerField(db_column='Amount', blank=True, null=True)  # Field name made lowercase.
@@ -355,25 +355,25 @@ class Product(models.Model):
         db_table = 'product'
 
 
-class Promotion(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    percent = models.FloatField(db_column='Percent')  # Field name made lowercase.
-    expirydate = models.DateField(db_column='ExpiryDate', blank=True, null=True)  # Field name made lowercase.
+# class Promotion(models.Model):
+#     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+#     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
+#     percent = models.FloatField(db_column='Percent')  # Field name made lowercase.
+#     expirydate = models.DateField(db_column='ExpiryDate', blank=True, null=True)  # Field name made lowercase.
 
-    class Meta:
+#     class Meta:
         
-        db_table = 'promotion'
+#         db_table = 'promotion'
 
 
-class PromotionItem(models.Model):
-    promotionid = models.OneToOneField(Promotion, models.CASCADE, db_column='PromotionID', primary_key=True)  # Field name made lowercase.
-    itemid = models.ForeignKey(Item, models.CASCADE, db_column='ItemID')  # Field name made lowercase.
+# class PromotionItem(models.Model):
+#     promotionid = models.OneToOneField(Promotion, models.CASCADE, db_column='PromotionID', primary_key=True)  # Field name made lowercase.
+#     itemid = models.ForeignKey(Item, models.CASCADE, db_column='ItemID')  # Field name made lowercase.
 
-    class Meta:
+#     class Meta:
         
-        db_table = 'promotion_item'
-        unique_together = (('promotionid', 'itemid'),)
+#         db_table = 'promotion_item'
+#         unique_together = (('promotionid', 'itemid'),)
 
 
 class Qrcode(models.Model):

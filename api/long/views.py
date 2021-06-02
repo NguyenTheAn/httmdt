@@ -1,4 +1,5 @@
 
+from api.mai.helpers import getCustomer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from ..models import *
@@ -47,6 +48,7 @@ class AddProduct(APIView):
         category = addCategory(data['category_name'],
                                data['category_description'])
         product.categoryid = category
+        product.name = data['name']
         product.manufacturingdate = datetime.datetime.strptime(data['manufacturingdate'], "%d/%m/%Y")
         product.expirydate = datetime.datetime.strptime(data['expirydate'], "%d/%m/%Y")
         product.amount = 0
@@ -56,7 +58,6 @@ class AddProduct(APIView):
             if data['category_name'].lower() == "book":
                 book = Book()
                 book.productid = product
-                book.name = data['book_name']
                 book.page = data['book_page']
                 book.author = addName(data['book_author'])
                 book.save()
@@ -152,3 +153,70 @@ class ImportProduct(APIView):
             product.save()
 
         return json_format(code = 200, message = "Success")
+
+
+class AddItem(APIView):
+    def post(self, request, format=None):
+        data = request.data
+        
+        item = Item()
+        product = Product.objects.get(id=data['productid'])
+        item.productid = product
+        item.price = data['price']
+        item.description = data['description']
+
+        item.save()
+
+        return json_format(code = 200, message = "Success")
+
+class EditItem(APIView):
+    def post(self, request, format=None):
+        data = request.data
+        
+        item = Item.objects.get(id=data['itemid'])
+
+        if "price" in data.keys():
+            item.price = data['price']
+        if "description" in data.keys():
+            item.description = data['description']
+
+        item.save()
+
+        return json_format(code = 200, message = "Success")
+
+class GetItem(APIView):
+    def post(self, request, format=None):
+        data = request.data
+        
+        return_data = getItem()
+
+        return json_format(code = 200, message = "Success", data=return_data)
+
+class AddFeedback(APIView):
+    def post(self, request, format=None):
+        data = request.data
+        
+        feedback = Feedback()
+        item = Item.objects.get(id=data['itemid'])
+        customer = Customer.objects.get(id=data['customerid'])
+        
+        feedback.itemid = item
+        feedback.customerid = customer
+        feedback.rate = data['rate']
+        feedback.content = data['content']
+
+        feedback.save()
+
+        return json_format(code = 200, message = "Success")
+
+class GetFeedbackByItem(APIView):
+    def post(self, request, format=None):
+        data = request.data
+        
+        return_data = [{"feedbackid": feedback.id,
+                        "itemid": getItem(feedback.itemid.id),
+                        "customerid": getCustomer(feedback.customerid.id),
+                        "rate": feedback.rate,
+                        "content": feedback.content} for feedback in Feedback.objects.filter(itemid__id=data['itemid'])]
+
+        return json_format(code = 200, message = "Success", data=return_data)
