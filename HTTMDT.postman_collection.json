@@ -1,0 +1,298 @@
+{
+	"info": {
+		"_postman_id": "dc9a62de-cdd0-433f-842a-8091c56276cb",
+		"name": "HTTMDT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "producer",
+			"item": [
+				{
+					"name": "add_producer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"Apple\",\n \"phonenumber\": \"123456789\",\n \"email\": \"support@apple.com\",\n \"address_city\": \"HN\",\n \"address_district\": \"Dong Da\",\n \"address_town\": \"Lotte\",\n \"address_street\": \"NLB\",\n \"address_description\": \"So 16 ngo 115\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/add_producer",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"add_producer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_producer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/get_producer",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"get_producer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "add_book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"producerid\": 1,\n \"category_name\": \"Science\",\n \"category_description\": \"xxx\",\n \"manufacturingdate\": \"01/06/2021\",\n \"expirydate\": \"01/06/2025\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/add_product",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"add_product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_clothes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"producerid\": 1,\n \"category_name\": \"Science\",\n \"category_description\": \"xxx\",\n \"manufacturingdate\": \"01/06/2021\",\n \"expirydate\": \"01/06/2025\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/add_product",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"add_product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_electronic",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"producerid\": 1,\n \"category_name\": \"Science\",\n \"category_description\": \"xxx\",\n \"manufacturingdate\": \"01/06/2021\",\n \"expirydate\": \"01/06/2025\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/add_product",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"add_product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/get_product",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"get_product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit_product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"productid\": 1,\n \"expirydate\": \"01/06/4444\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/edit_product",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"edit_product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"productid\": 3}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/delete_product",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"delete_product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "import product",
+			"item": [
+				{
+					"name": "import_product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"suplier\": \"AOC\",\n \"warehousestaffuserid\": 1,\n \"import_product\": [{\"productid\": 3, \"amount\": 10, \"importprice\": 10000}]}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/import_product",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"import_product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -128,8 +128,8 @@ class ImportProduct(APIView):
         data = request.data
 
         importingRecord = Importingrecord()
-        # staff = Warehousestaff.objects.get(id=data['warehousestaffuserid'])        
-        # importingRecord.warehousestaffuserid = staff
+        staff = Warehousestaff.objects.get(id=data['warehousestaffuserid'])        
+        importingRecord.warehousestaffuserid = staff
 
         suplier = addSuplier(data['suplier'])
         importingRecord.supplierid = suplier

@@ -223,8 +223,8 @@ class Historyline(models.Model):
 
 class Importingrecord(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    # warehousestaffuserid = models.ForeignKey('Warehousestaff', models.CASCADE, db_column='WarehouseStaffUserID')  # Field name made lowercase.
-    # supplierid = models.ForeignKey('Supplier', models.CASCADE, db_column='SupplierID')  # Field name made lowercase.
+    warehousestaffuserid = models.ForeignKey('Warehousestaff', models.CASCADE, db_column='WarehouseStaffUserID')  # Field name made lowercase.
+    supplierid = models.ForeignKey('Supplier', models.CASCADE, db_column='SupplierID')  # Field name made lowercase.
     date = models.DateField(db_column='Date', blank=True, null=True)  # Field name made lowercase.
     # supplier = models.IntegerField(db_column='Supplier', blank=True, null=True)  # Field name made lowercase.
     # productid =models.ForeignKey("Product", models.CASCADE, db_column='ProductID') # Field name made lowercase.
