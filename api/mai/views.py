@@ -73,15 +73,14 @@ class Signin(APIView):
 class GetItemByCategory(APIView):
     def post(self, request, format=None):
         data = request.data
-        data = getItem(category =  data["category"])
+        data = getItemByCategory(category=data['category'])
         return json_format(code = 200, message = "Success", data = data)    
 
-class GetItemDetail(APIView):
-
-    def post(self, request, format = None):
-        data = request.data
-        data = getItem(itemid = data["item_id"])
-        return json_format(code = 200, message= "Success", data = data)
+# class GetItemDetail(APIView):
+#     def post(self, request, format = None):
+#         data = request.data
+#         data = getItem(itemid = data["item_id"])
+#         return json_format(code = 200, message= "Success", data = data)
 
 class GetAllItem(APIView):
 
@@ -101,10 +100,12 @@ class AddShippingAddress(APIView):
 
     def post(self, request, format = None):
         data = request.data
+        customer = Customer.objects.get(id = data["customer_id"] )
         shippingaddress = Shippingaddress()
+        shippingaddress.customerid = customer
         shippingaddress.name = data["name"]
         shippingaddress.phone = data["phone"]
-        shippingaddress.add = data["add"]
+        shippingaddress.add = data["address"]
         shippingaddress.save()
         return json_format(code = 200, message= "Success")
 

@@ -37,12 +37,20 @@ urlpatterns = [
     # Import product
     path('import_product', ImportProduct.as_view(), name = "import_product"),
 
+    # Item
+    path('add_item', AddItem.as_view(), name = "add_item"),
+    path('edit_item', EditItem.as_view(), name = "edit_item"),
+    path('get_item', GetItem.as_view(), name = "get_item"),
+
+    # Feedback
+    path('add_feedback', AddFeedback.as_view(), name = "add_feedback"),
+    path('get_feedback', GetFeedbackByItem.as_view(), name = "get_feedback"),
 
     path('register', Register.as_view(), name = "create_account"),
     path('signin', Signin.as_view(), name = "log_in"),
     path('get_item_by_category', GetItemByCategory.as_view(), name = "get_item_by_category"),
     path('get_all_item', GetAllItem.as_view(), name = "get_all_item"),
-    path('get_item_detail', GetItemDetail.as_view(), name = "get_item_detail"),
+    # path('get_item_detail', GetItemDetail.as_view(), name = "get_item_detail"),
     path('get_shipping_address', GetShippingAddress.as_view(), name = "get_shipping_address"),
     path('add_shipping_address', AddShippingAddress.as_view(), name = "add_shipping_address"),
     path('add_item_to_cart', AddItem2Cart.as_view(), name = "AddItem2Cart"),
