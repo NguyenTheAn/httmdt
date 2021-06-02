@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import *
+from .long.views import *
 
 urlpatterns = [
     # partner
     # path('AllTaxStatistic', AllTaxStatistic.as_view(), name = "AllTaxStatistic"), sample
+    path('add_producer', AddProducer.as_view(), name = "add_producer"),
+    path('get_producer', GetProducer.as_view(), name = "get_producer"),
+    path('add_product', AddProduct.as_view(), name = "add_product"),
+    path('get_product', GetProduct.as_view(), name = "get_product"),
+
 ]

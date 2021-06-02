@@ -329,12 +329,12 @@ class Producer(models.Model):
 class Product(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     # importingrecordid = models.ForeignKey(Importingrecord, models.CASCADE, db_column='ImportingRecordID')  # Field name made lowercase.
-    produceris = models.ForeignKey(Producer, models.CASCADE, db_column='ProducerID')  # Field name made lowercase.
+    producerid = models.ForeignKey(Producer, models.CASCADE, db_column='ProducerID')  # Field name made lowercase.
     categoryid = models.ForeignKey(Category, models.CASCADE, db_column='CategoryID')  # Field name made lowercase.
     manufacturingdate = models.DateField(db_column='ManufacturingDate', blank=True, null=True)  # Field name made lowercase.
     expirydate = models.DateField(db_column='ExpiryDate', blank=True, null=True)  # Field name made lowercase.
-    producer = models.IntegerField(db_column='Producer', blank=True, null=True)  # Field name made lowercase.
-    category = models.IntegerField(db_column='Category', blank=True, null=True)  # Field name made lowercase.
+    # producer = models.IntegerField(db_column='Producer', blank=True, null=True)  # Field name made lowercase.
+    # category = models.IntegerField(db_column='Category', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         
