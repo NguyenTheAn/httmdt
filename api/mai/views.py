@@ -30,9 +30,10 @@ class Register(APIView):
         account.password = data["password"]
         account.save()
         user = User()
-        user.fullname = fullname.id
-        user.contactinfo = contactinfo.id
-        user.address = address.id
+        user.account = account
+        user.fullname = fullname
+        user.contactinfo = contactinfo
+        user.address = address
 
         user.save()
 
@@ -54,7 +55,7 @@ class Register(APIView):
     
         return json_format(code = 200, message = "Success")
 
-class SigninViews(APIView):
+class Signin(APIView):
     
     def post(self, request, format=None):
         users = [user for user in User.objects.all()]
@@ -62,7 +63,7 @@ class SigninViews(APIView):
         data = request.data
         for user in users:
             for account in accounts:
-                if user.account = account.id:
+                if user.account = account:
                     if account.username = data["username"] and account.password = data["password"]:
                         data = getUser(user.id)
                     return json_format(code = 200, message = "Login successfully", data = data)
