@@ -51,7 +51,7 @@ def getProducer(producerid=None):
                  "phonenumber": producer.phonenumber,
                  "email": producer.email} for producer in Producer.objects.all()]
 
-def addCategory(name, description):
+def addCategory(name, description=None):
 
     categories = [category for category in Category.objects.all()]
     for category in categories:
@@ -64,6 +64,21 @@ def addCategory(name, description):
     category.save()
 
     return category
+
+def addSuplier(name, phonenumber=None, email=None):
+
+    suppliers = [suplier for suplier in Supplier.objects.all()]
+    for suplier in suppliers:
+        if suplier.name == name:
+            return suplier
+            
+    suplier = Supplier()
+    suplier.name = name
+    suplier.phonenumber = phonenumber
+    suplier.email = email
+    suplier.save()
+
+    return suplier
 
 def getCategory(categoryid=None):
     if categoryid is not None:
@@ -85,10 +100,12 @@ def getProduct(productid=None):
                 "producerid": getProducer(product.producerid.id),
                 "categoryid": getCategory(product.categoryid.id),
                 "manifacturingdate": product.manufacturingdate,
-                "expirydate": product.expirydate}
+                "expirydate": product.expirydate,
+                "amount": product.amount}
     else:  
         return [{"productid": product.id,
                 "producerid": getProducer(product.producerid.id),
                 "categoryid": getCategory(product.categoryid.id),
                 "manifacturingdate": product.manufacturingdate,
-                "expirydate": product.expirydate} for product in Product.objects.all()]
+                "expirydate": product.expirydate,
+                "amount": product.amount} for product in Product.objects.all()]
