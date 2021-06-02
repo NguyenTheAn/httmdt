@@ -10,7 +10,7 @@ from django.db import models
 
 class Account(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    userid = models.ForeignKey('User', models.CASCADE, db_column='UserID')  # Field name made lowercase.
+    # userid = models.ForeignKey('User', models.CASCADE, db_column='UserID')  # Field name made lowercase.
     username = models.CharField(db_column='Username', max_length=255, blank=True, null=True)  # Field name made lowercase.
     password = models.CharField(db_column='Password', max_length=255, blank=True, null=True)  # Field name made lowercase.
     role = models.CharField(db_column='Role', max_length=255, blank=True, null=True)  # Field name made lowercase.
@@ -120,7 +120,7 @@ class Clothes(models.Model):
 
 class Contactinfo(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    userid = models.ForeignKey('User', models.CASCADE, db_column='UserID')  # Field name made lowercase.
+    # userid = models.ForeignKey('User', models.CASCADE, db_column='UserID')  # Field name made lowercase.
     phonenumber = models.CharField(db_column='PhoneNumber', max_length=255, blank=True, null=True)  # Field name made lowercase.
     email = models.CharField(db_column='Email', max_length=255, blank=True, null=True)  # Field name made lowercase.
 
@@ -453,9 +453,9 @@ class User(models.Model):
     # account = models.IntegerField(db_column='Account', blank=True, null=True)  # Field name made lowercase.
     addressid = models.OneToOneField(Address, models.CASCADE, db_column='AddressID')  # Field name made lowercase.
     # fullname = models.IntegerField(db_column='FullName', blank=True, null=True)  # Field name made lowercase.
-    fullname = models.ForeignKey('FullName', models.CASCADE, db_column='FullName')
+    fullnameid = models.ForeignKey('FullName', models.CASCADE, db_column='FullNameID')
     # contactinfo = models.IntegerField(db_column='Contactinfo', blank=True, null=True)  # Field name made lowercase.
-    address = models.IntegerField(db_column='Address', blank=True, null=True)  # Field name made lowercase.
+    #address = models.IntegerField(db_column='Address', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         
