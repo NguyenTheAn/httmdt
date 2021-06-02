@@ -52,7 +52,7 @@ def getProducer(producerid=None):
                  "email": producer.email} for producer in Producer.objects.all()]
 
 def addCategory(name, description=None):
-
+    name = name.lower()
     categories = [category for category in Category.objects.all()]
     for category in categories:
         if category.name == name:
@@ -93,19 +93,74 @@ def getCategory(categoryid=None):
                 "description": category.description} for category in Category.objects.all()]
 
 def getProduct(productid=None):
-
     if productid is not None:
         product = Product.objects.get(id=productid)
+        category = getCategory(product.categoryid.id)
+        if category['name'] == 'book':
+            book = Book.objects.get(productid=productid)
+            info = {"name": book.name,
+                    "page": book.page,
+                    "author": book.author}
+        if category['name'] == 'clothes':
+            clothes = Clothes.objects.get(productid=productid)
+            info = {"clothtype": clothes.clothtype,
+                    "color": clothes.color,
+                    "gender": clothes.gender,
+                    "ages": clothes.ages,
+                    "brand": clothes.brand,
+                    "material": clothes.material}
+        if category['name'] == 'electronic':
+            electronic = Electronic.objects.get(productid=productid)
+            info = {"devicetype": electronic.devicetype,
+                    "color": electronic.color,
+                    "brand": electronic.brand,
+                    "material": electronic.material,
+                    "power": electronic.power,
+                    "voltage": electronic.voltage,
+                    "electriccurrent": electronic.electriccurrent,
+                    "frequency": electronic.frequency}
         return {"productid": product.id,
                 "producerid": getProducer(product.producerid.id),
-                "categoryid": getCategory(product.categoryid.id),
+                "categoryid": category,
+                "info": info,
                 "manifacturingdate": product.manufacturingdate,
                 "expirydate": product.expirydate,
                 "amount": product.amount}
-    else:  
-        return [{"productid": product.id,
-                "producerid": getProducer(product.producerid.id),
-                "categoryid": getCategory(product.categoryid.id),
-                "manifacturingdate": product.manufacturingdate,
-                "expirydate": product.expirydate,
-                "amount": product.amount} for product in Product.objects.all()]
+    else:
+        return_data = []
+        for product in Product.objects.all():
+            category = getCategory(product.categoryid.id)
+            if category['name'] == 'book':
+                book = Book.objects.get(productid=product.id)
+                info = {"name": book.name,
+                        "page": book.page,
+                        "author": book.author}
+            if category['name'] == 'clothes':
+                clothes = Clothes.objects.get(productid=product.id)
+                info = {"clothtype": clothes.clothtype,
+                        "color": clothes.color,
+                        "gender": clothes.gender,
+                        "ages": clothes.ages,
+                        "brand": clothes.brand,
+                        "material": clothes.material}
+            if category['name'] == 'electronic':
+                electronic = Electronic.objects.get(productid=product.id)
+                info = {"devicetype": electronic.devicetype,
+                        "color": electronic.color,
+                        "brand": electronic.brand,
+                        "material": electronic.material,
+                        "power": electronic.power,
+                        "voltage": electronic.voltage,
+                        "electriccurrent": electronic.electriccurrent,
+                        "frequency": electronic.frequency}
+            return_data.append({"productid": product.id,
+                                "producerid": getProducer(product.producerid.id),
+                                "categoryid": category,
+                                "info": info,
+                                "manifacturingdate": product.manufacturingdate,
+                                "expirydate": product.expirydate,
+                                "amount": product.amount})
+        return return_data
+
+def addName(fullnamestr):
+    return None
