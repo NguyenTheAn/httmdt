@@ -372,6 +372,7 @@ class Qrcode(models.Model):
 
 
 class Salesstaff(models.Model):
+    id = models.IntegerField(db_column='ID', primary_key=True)
     userid = models.OneToOneField('User', models.CASCADE, db_column='UserID', primary_key=True)  # Field name made lowercase.
 
     class Meta:
@@ -475,6 +476,7 @@ class Voucher(models.Model):
 
 
 class Warehousestaff(models.Model):
+    id = models.IntegerField(db_column='ID', primary_key=True)
     userid = models.OneToOneField(User, models.CASCADE, db_column='UserID', primary_key=True)  # Field name made lowercase.
 
     class Meta:
