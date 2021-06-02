@@ -16,7 +16,6 @@ class Register(APIView):
         
         if data["username"] in usernames:
             return json_format(code = 400, message = "Account exists")
-        
 
         address = Address()
         address.save()
@@ -54,3 +53,17 @@ class Register(APIView):
             a.save()
     
         return json_format(code = 200, message = "Success")
+
+class SigninViews(APIView):
+    
+    def post(self, request, format=None):
+        users = [user for user in User.objects.all()]
+        accounts = [account for account in Account.objects.all()]
+        data = request.data
+        for user in users:
+            for account in accounts:
+                if user.account = account.id:
+                    if account.username = data["username"] and account.password = data["password"]:
+                        data = getUser(user.id)
+                    return json_format(code = 200, message = "Login successfully", data = data)
+        return json_format(code = 400, message = "Wrong username or password")
