@@ -49,6 +49,7 @@ class AddProduct(APIView):
                                data['category_description'])
         product.categoryid = category
         product.name = data['name']
+        product.image = data['image']
         product.manufacturingdate = datetime.datetime.strptime(data['manufacturingdate'], "%d/%m/%Y")
         product.expirydate = datetime.datetime.strptime(data['expirydate'], "%d/%m/%Y")
         product.amount = 0
