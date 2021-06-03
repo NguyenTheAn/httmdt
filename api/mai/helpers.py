@@ -18,9 +18,11 @@ def getShoppingCart(customerid = None):
     return_data = []
     for cartline in cartlines:
         tmp = {}
-        tmp["cartline_id"] = cartline.id
-        tmp["item"] = getItem(cartline.item.id)
+        # tmp["cartline_id"] = cartline.id
+        # tmp["item"] = getItem(cartline.item.id)
+        tmp['item'] = getProduct(cartline.item.productid.id)
         tmp['num'] = cartline.num
+        tmp['price'] = cartline.item.price
         return_data.append(tmp)
     return return_data
 
@@ -67,7 +69,7 @@ def getUser(userid = None):
             customer = Customer.objects.get(userid = user.id)
             customer_id = customer.id
             tmp["customer_id"] = customer_id
-            tmp['cart'] = getShoppingCart(customerid = customer_id)
+            # tmp['cart'] = getShoppingCart(customerid = customer_id)
             if Orderhistory.objects.filter(customerid__id = customer_id).count() == 0:
                 orderhistory = Orderhistory(customerid = customer)
                 orderhistory.save()

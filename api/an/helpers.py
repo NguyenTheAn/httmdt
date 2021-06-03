@@ -24,22 +24,22 @@ def getOrderline(customerid):
 def getOrder(orderid = None):
     if orderid is None:
         data = [{"id" : order.id,
-                 "orderprocessstaffuserid" : getUser(order.orderprocessstaffuserid.userid.id) if order.orderprocessstaffuserid is not None else None,
+                #  "orderprocessstaffuserid" : getUser(order.orderprocessstaffuserid.userid.id) if order.orderprocessstaffuserid is not None else None,
                  "customer" : getUser(order.customeruserid.userid.id),
-                 "voucher" : getVoucher(order.voucherid.id) if order.voucherid is not None else None,
-                 "shoppingcart" : getShoppingCart(order.shoppingcartid.customerid.id),
+                #  "voucher" : getVoucher(order.voucherid.id) if order.voucherid is not None else None,
+                 "orderitem" : getShoppingCart(order.shoppingcartid.customerid.id),
                  "shippingadress" : getShippingAdress(order.shippingaddress.id, order.customeruserid.id),
-                 "shippinginfo" : getShippinginfo(order.shippinginfo.id),
+                 "shippinginfo" : getShippinginfo(order.shippinginfo.id)['shipfee'],
                  "status" : order.status} for order in Order.objects.all()]
     else:
         order = Order.objects.get(id = orderid)
         data = [{"id" : order.id,
-                 "orderprocessstaffuserid" : getUser(order.orderprocessstaffuserid.userid.id) if order.orderprocessstaffuserid is not None else None,
+                #  "orderprocessstaffuserid" : getUser(order.orderprocessstaffuserid.userid.id) if order.orderprocessstaffuserid is not None else None,
                  "customer" : getUser(order.customeruserid.userid.id),
-                 "voucher" : getVoucher(order.voucherid.id) if order.voucherid is not None else None,
-                 "shoppingcart" : getShoppingCart(order.shoppingcartid.customerid.id),
+                #  "voucher" : getVoucher(order.voucherid.id) if order.voucherid is not None else None,
+                 "orderitem" : getShoppingCart(order.shoppingcartid.customerid.id),
                  "shippingadress" : getShippingAdress(order.shippingaddress.id, order.customeruserid.id),
-                 "shippinginfo" : getShippinginfo(order.shippinginfo.id),
+                 "shippinginfo" : getShippinginfo(order.shippinginfo.id)['shipfee'],
                  "status" : order.status}]
     return data
 
