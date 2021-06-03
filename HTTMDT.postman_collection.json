@@ -75,7 +75,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"producerid\": 1,\n \"category_name\": \"Book\",\n \"category_description\": \"xxx\",\n \"name\": \"Giai tich 2\",\n \"book_page\": 222,\n \"book_author\": \"Long lich\",\n \"manufacturingdate\": \"01/06/2021\",\n \"expirydate\": \"01/06/2025\"}",
+							"raw": "{\"producerid\": 1,\n \"category_name\": \"Book\",\n \"category_description\": \"xxx\",\n \"name\": \"Giai tich 2\",\n \"image\": \"home/long/image.png\",\n \"book_page\": 222,\n \"book_author\": \"Long lich\",\n \"manufacturingdate\": \"01/06/2021\",\n \"expirydate\": \"01/06/2025\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -107,7 +107,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"producerid\": 1,\n \"category_name\": \"clothes\",\n \"name\": \"Quan dui hoa\",\n \"category_description\": \"xxx\",\n \"clothtype\": \"quan\",\n \"color\": \"red\",\n \"gender\": \"male\",\n \"ages\": 24,\n \"brand\": \"mixigaming\",\n \"material\": \"gold\",\n \"manufacturingdate\": \"01/06/2021\",\n \"expirydate\": \"01/06/2025\"}",
+							"raw": "{\"producerid\": 1,\n \"category_name\": \"clothes\",\n \"name\": \"Quan dui hoa\",\n \"image\": \"home/long/image.png\",\n \"category_description\": \"xxx\",\n \"clothtype\": \"quan\",\n \"color\": \"red\",\n \"gender\": \"male\",\n \"ages\": 24,\n \"brand\": \"mixigaming\",\n \"material\": \"gold\",\n \"manufacturingdate\": \"01/06/2021\",\n \"expirydate\": \"01/06/2025\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -139,7 +139,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"producerid\": 1,\n\"name\": \"noi com dien\",\n \"category_name\": \"electronic\",\n \"category_description\": \"xxx\",\n \"devicetype\": \"screen\",\n \"color\": \"pink\",\n \"brand\": \"infinity\",\n \"material\": \"plastic\",\n \"power\": \"333\",\n \"voltage\": \"444\",\n \"electriccurrent\": \"222\",\n \"frequency\": \"111\",\n \"manufacturingdate\": \"01/06/2021\",\n \"expirydate\": \"01/06/2025\"}",
+							"raw": "{\"producerid\": 1,\n\"name\": \"noi com dien\",\n \"image\": \"home/long/image.png\",\n \"category_name\": \"electronic\",\n \"category_description\": \"xxx\",\n \"devicetype\": \"screen\",\n \"color\": \"pink\",\n \"brand\": \"infinity\",\n \"material\": \"plastic\",\n \"power\": \"333\",\n \"voltage\": \"444\",\n \"electriccurrent\": \"222\",\n \"frequency\": \"111\",\n \"manufacturingdate\": \"01/06/2021\",\n \"expirydate\": \"01/06/2025\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -295,6 +295,75 @@
 			]
 		},
 		{
+			"name": "feedback",
+			"item": [
+				{
+					"name": "add_feedback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"itemid\": 1,\n \"customerid\": 1,\n \"rate\": \"0 xao\",\n \"content\": \"hang nhu buoi\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/add_feedback",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"add_feedback"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_feedback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"itemid\": 1}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/get_feedback",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"get_feedback"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "item",
 			"item": [
 				{
@@ -388,75 +457,6 @@
 							"path": [
 								"api",
 								"edit_item"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "feedback",
-			"item": [
-				{
-					"name": "add_feedback",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"itemid\": 1,\n \"customerid\": 1,\n \"rate\": \"0 xao\",\n \"content\": \"hang nhu buoi\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/add_feedback",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"add_feedback"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get_feedback",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"itemid\": 1}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/get_feedback",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"get_feedback"
 							]
 						}
 					},
