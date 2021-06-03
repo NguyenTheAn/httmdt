@@ -14,17 +14,14 @@ def getShoppingCart(customerid = None):
         cart.save()
     else:
         cart = Shoppingcart.objects.get(customerid__id = customerid)
-    cartlines = [cartline for cartline in Cartline.objects.all()]
+    cartlines = [cartline for cartline in Cartline.objects.filter(shoppingcartid_id = cart.id)]
     return_data = []
     for cartline in cartlines:
-        if cartline.shoppingcartid == cart.id:
-            tmp = {}
-            tmp["cartline_id"] = cartline.id
-            tmp['item_id'] = cartline.item.id
-            tmp["item"] = Item.objects.get(id = cartline.item.id).name
-            tmp["price"] = Item.objects.get(id = cartline.item.id).price
-            tmp["number"] = Item.objects.get(id = cartline.item.id).num
-            return_data.append(tmp)
+        tmp = {}
+        tmp["cartline_id"] = cartline.id
+        tmp["item"] = getItem(cartline.item.id)
+        tmp['num'] = cartline.num
+        return_data.append(tmp)
     return return_data
 
 def getShippingAddressList(customerid = None):
@@ -67,11 +64,12 @@ def getUser(userid = None):
         tmp["name"] = Fullname.objects.get(id=user.fullname.id).firstname
         tmp["type"] = role_type
         if role_type == "Customer":
-            customer_id = Customer.objects.get(userid = user.id).id
+            customer = Customer.objects.get(userid = user.id)
+            customer_id = customer.id
             tmp["customer_id"] = customer_id
             tmp['cart'] = getShoppingCart(customerid = customer_id)
-            if Orderhistory.objects.filter(customerid = customer_id).count() == 0:
-                orderhistory = Orderhistory(customerid = customer_id)
+            if Orderhistory.objects.filter(customerid__id = customer_id).count() == 0:
+                orderhistory = Orderhistory(customerid = customer)
                 orderhistory.save()
             
         if userid == user.id:
